@@ -59,7 +59,7 @@ import FeatureView from "./childComps/FeatureView";
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 
-import { getHomeMultidata, getGoodsData } from "network/home";
+import { getHomeMultidata, getHomeGoods } from "network/home";
 
 export default {
   name: "home",
@@ -86,7 +86,9 @@ export default {
     this.getHomeMultidata();
 
     // 2. 请求商品数据
-    this.getGoodsData("pop");
+    this.getHomeGoods("pop");
+    this.getHomeGoods("new");
+    this.getHomeGoods("sell");
   },
   methods: {
     getHomeMultidata() {
@@ -96,12 +98,11 @@ export default {
         // console.log(this.banners, this.recommends);
       });
     },
-    getGoodsData(type) {
+    getHomeGoods(type) {
       const page = this.goods[type].page + 1;
-      getGoodsData(type, page).then((res) => {
-        console.log(res,page,)
-        this.goods[type].list.push(...res.data.list)
-        this.goods[type].page +=1
+      getHomeGoods(type, page).then((res) => {
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
       });
     },
   },

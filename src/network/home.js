@@ -6,9 +6,9 @@ export function getHomeMultidata(){
   })
 }
 
-export function getGoodsData(type, page){
+export function getHomeGoods(type, page){
   return request({
-    url: '/home/data',
+    url: 'http://localhost:8080/home/data',
     parmas: {
       type,
       page
