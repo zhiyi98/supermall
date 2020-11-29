@@ -6,12 +6,12 @@ export function getHomeMultidata(){
   })
 }
 
-// export function getGoodsData(){
-//   return request({
-//     url: '',
-//     parmas: {
-//       type,
-//       page
-//     }
-//   })
-// }
+export function getGoodsData(type, page){
+  return request({
+    url: '/home/data',
+    parmas: {
+      type,
+      page
+    }
+  })
+}
