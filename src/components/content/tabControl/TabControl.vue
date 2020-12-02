@@ -31,7 +31,7 @@ export default {
   methods: {
     itemClick(index) {
       this.currentIndex = index
-      // console.log(index === this.currentIndex)
+      this.$emit('tabClick', index)
     }
   },
 };
