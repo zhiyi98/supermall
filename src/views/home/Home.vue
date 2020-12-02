@@ -9,7 +9,7 @@
       class="tab-control"
       @tabClick="tabClick"
     />
-    <goods-list :goods="goods['pop'].list" />
+    <goods-list :goods="showGoods" />
 
   </div>
 </template>
