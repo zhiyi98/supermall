@@ -8,8 +8,8 @@ export function getHomeMultidata(){
 
 export function getHomeGoods(type, page){
   return request({
-    url: 'http://localhost:8080/home/data',
-    parmas: {
+    url: '/home/data',
+    params: {
       type,
       page
     }
