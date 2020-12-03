@@ -11,8 +11,8 @@
       @tabClick="tabClick"
     />
     <goods-list :goods="showGoods" />
-
     <back-top @click.native="backClick" />
+
     <scroll> </scroll>
   </div>
 </template>
@@ -26,7 +26,7 @@ import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
-import BackTop from 'components/content/backTop/BackTop.vue';
+import BackTop from "components/content/backTop/BackTop.vue";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -85,7 +85,7 @@ export default {
           break;
       }
     },
-    backClick(){
+    backClick() {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
 
