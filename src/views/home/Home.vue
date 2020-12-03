@@ -11,6 +11,8 @@
       @tabClick="tabClick"
     />
     <goods-list :goods="showGoods" />
+
+    <back-top @click.native="backClick" />
     <scroll> </scroll>
   </div>
 </template>
@@ -24,6 +26,7 @@ import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
+import BackTop from 'components/content/backTop/BackTop.vue';
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -37,6 +40,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
+    BackTop,
   },
   data() {
     return {
@@ -81,6 +85,9 @@ export default {
           break;
       }
     },
+    backClick(){
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    },
 
     /**
      * 网络请求相关的方法
@@ -105,7 +112,7 @@ export default {
 
 <style scroped>
 #home {
-  /* padding-top: 44px; */
+  padding-top: 44px;
   height: 100vh;
 }
 

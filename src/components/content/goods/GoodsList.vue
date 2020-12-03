@@ -33,5 +33,6 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 2px;
+  padding-bottom: 49px;
 }
 </style>
