@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+
     <home-swiper :banners="banners" />
     <recommend-view :recommends="recommends" />
     <feature-view />
@@ -10,7 +11,7 @@
       @tabClick="tabClick"
     />
     <goods-list :goods="showGoods" />
-
+    <scroll> </scroll>
   </div>
 </template>
 
@@ -21,7 +22,8 @@ import FeatureView from "./childComps/FeatureView";
 
 import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
-import GoodsList from 'components/content/goods/GoodsList';
+import GoodsList from "components/content/goods/GoodsList";
+import Scroll from "components/common/scroll/Scroll";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -34,6 +36,7 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
+    Scroll,
   },
   data() {
     return {
@@ -44,13 +47,13 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
-      currentType: 'pop'
+      currentType: "pop",
     };
   },
   computed: {
     showGoods() {
-      return this.goods[this.currentType].list
-    }
+      return this.goods[this.currentType].list;
+    },
   },
   created() {
     // 1. 请求多个数据
@@ -68,14 +71,14 @@ export default {
     tabClick(index) {
       switch (index) {
         case 0:
-          this.currentType = 'pop'
-          break
+          this.currentType = "pop";
+          break;
         case 1:
-          this.currentType = 'new'
-          break
+          this.currentType = "new";
+          break;
         case 2:
-          this.currentType = 'sell'
-          break
+          this.currentType = "sell";
+          break;
       }
     },
 
@@ -102,7 +105,8 @@ export default {
 
 <style scroped>
 #home {
-  padding-top: 44px;
+  /* padding-top: 44px; */
+  height: 100vh;
 }
 
 .home-nav {
@@ -120,4 +124,9 @@ export default {
   position: sticky;
   top: 44px;
 }
+
+/* .content {
+  height: calc(100%-98px);
+  overflow: hidden;
+} */
 </style>
