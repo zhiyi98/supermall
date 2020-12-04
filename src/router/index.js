@@ -25,6 +25,10 @@ export default new Router({
       path: '/profile',
       component: () => import('../views/profile/Profile.vue')
     },
+    {
+      path: '/detail/:id',
+      component: () => import('../views/detail/detail.vue')
+    },
   ],
   mode: 'history'
 })

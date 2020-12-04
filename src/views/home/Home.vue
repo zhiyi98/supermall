@@ -2,18 +2,20 @@
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
 
-    <home-swiper :banners="banners" />
+    <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
     <recommend-view :recommends="recommends" />
     <feature-view />
     <tab-control
       :titles="['流行', '新款', '精选']"
       class="tab-control"
       @tabClick="tabClick"
+      ref="tabControl"
+      :class="{ fixed: isTabFixed }"
     />
     <goods-list :goods="showGoods" />
     <back-top @click.native="backClick" />
 
-    <scroll> </scroll>
+    <!-- <scroll> </scroll> -->
   </div>
 </template>
 
@@ -39,8 +41,8 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroll,
     BackTop,
+    Scroll,
   },
   data() {
     return {
@@ -52,12 +54,23 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
+      tabOffsetTop: 0,
+      isTabFixed: false,
     };
   },
   computed: {
     showGoods() {
       return this.goods[this.currentType].list;
     },
+  },
+  destroyed() {
+    console.log("home destroyed");
+  },
+  activated() {
+    document.body.scrollTop = document.documentElement.scrollTop = this.saveY;
+  },
+  deactivated(e) {
+    this.saveY = 1000;
   },
   created() {
     // 1. 请求多个数据
@@ -68,6 +81,7 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+  mounted() {},
   methods: {
     /**
      * 事件监听相关的方法
@@ -87,6 +101,16 @@ export default {
     },
     backClick() {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
+    },
+    contentScroll(position) {
+      this.isShowBackTop = -position.y > 1000;
+
+      this.isTabFixed = -position.y > this.tabOffsetTop;
+    },
+    swiperImageLoad() {
+      // 获取tabControl的offsetTop
+      // 所有组件都有一个$el: 用于获取组件中的元素
+      // console.log(this.$refs.tabControl.$el.offsetTop);
     },
 
     /**
@@ -129,6 +153,13 @@ export default {
 
 .tab-control {
   position: sticky;
+  top: 44px;
+}
+
+.fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
   top: 44px;
 }
 
